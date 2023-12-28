@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Puzzle Game</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-left: 10vw;
+        }
+        .puzzle-container {
+            padding: 10px;
+            background-color: #dddddd   ;
+            width: fit-content;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+        .puzzle-set {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            max-width: 600px;
+            overflow: hidden;
+            row-gap: 2px;
+            column-gap: 4px;
+        }
+        .puzzle-piece img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Puzzle</h1>
+    <h2>Time: 30s</h2>
+    <div class="puzzle-container">
+        <div class="puzzle-set">
+            <div class="puzzle-piece" id="piece1"><img src="./3.jpg" /></div>
+            <div class="puzzle-piece" id="piece2"><img src="./5.jpg" /></div>
+            <div class="puzzle-piece" id="piece3"><img src="./1.jpg" /></div>
+            <div class="puzzle-piece" id="piece4"><img src="./2.jpg" /></div>
+            <div class="puzzle-piece" id="piece5"><img src="./4.jpg" /></div>
+            <div class="puzzle-piece" id="piece6"><img src="./6.jpg" /></div>
+            <div class="puzzle-piece" id="piece7"><img src="./7.jpg" /></div>
+            <div class="puzzle-piece" id="piece8"><img src="./5.jpg" /></div>
+            <div class="puzzle-piece" id="piece9"><img src="./8.jpg" /></div>
+        </div>
+    </div>
+    <script>
+        let selectedPiece = null;
+
+        const puzzlePieces = document.querySelectorAll('.puzzle-piece');
+
+        puzzlePieces.forEach(piece => {
+            piece.addEventListener('click', selectPiece);
+        });
+
+        function selectPiece() {
+            if (!selectedPiece) {
+                selectedPiece = this;
+                this.style.border = '2px solid red';
+            } else {
+                if (selectedPiece !== this) {
+                    swapPieces(selectedPiece, this);
+                }
+                selectedPiece.style.border = '2px solid transparent';
+                selectedPiece = null;
+            }
+        }
+
+        function swapPieces(piece1, piece2) {
+            const temp = document.createElement('div');
+            piece1.parentNode.insertBefore(temp, piece1);
+            piece2.parentNode.insertBefore(piece1, piece2);
+            temp.parentNode.insertBefore(piece2, temp);
+            temp.parentNode.removeChild(temp);
+        }
+    </script>
+</body>
+</html>
