@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
     <title>Puzzle Game</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <style>
         body {
             background-image: url('./images/background.png');
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: top;
             background-size: cover;
             height: 100vh;
+            padding-bottom: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         h2 {
-            margin-top: 500px;
+            margin-top: 180px;
             color: #fff;
-            font-size: 60px;
+            font-size: 30px;
             text-align: center;
         }
         .puzzle-container {
@@ -34,6 +37,12 @@
         .puzzle-piece img {
             width: 100%;
             border-radius: 5px;
+        }
+        @media only screen and (max-width: 600px) {
+            h2 {
+                margin-top: 150px;
+                font-size: 30px;
+            }
         }
     </style>
 </head>
