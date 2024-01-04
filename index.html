@@ -1,149 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Puzzle Game</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <style>
-        body {
-            background-image: url('./images/background.png');
-            background-repeat: no-repeat;
-            background-position: top;
-            background-size: cover;
-            height: 100vh;
-            padding-bottom: 40px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        h2 {
-            margin-top: 180px;
-            color: #fff;
-            font-size: 30px;
-            text-align: center;
-        }
-        .puzzle-container {
-            padding: 10px;
-            background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
-                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-            width: fit-content;
-            margin: 0 auto;
-            border-radius: 10px;
-        }
-        .puzzle-set {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            max-width: 600px;
-            row-gap: 2px;
-            column-gap: 4px;
-        }
-        .puzzle-piece img {
-            width: 100%;
-            border-radius: 5px;
-        }
-        @media only screen and (max-width: 600px) {
-            h2 {
-                margin-top: 150px;
-                font-size: 30px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game list</title>
 </head>
 <body>
-    <main>
-        <h2>Time: <span id="time">--</span></h2>
-        <div class="puzzle-container">
-            <div class="puzzle-set">
-                <div class="puzzle-piece" id="piece1"><img src="./images/0.jpg" /></div>
-                <div class="puzzle-piece" id="piece2"><img src="./images/1.jpg" /></div>
-                <div class="puzzle-piece" id="piece3"><img src="./images/2.jpg" /></div>
-                <div class="puzzle-piece" id="piece4"><img src="./images/3.jpg" /></div>
-                <div class="puzzle-piece" id="piece5"><img src="./images/4.jpg" /></div>
-                <div class="puzzle-piece" id="piece6"><img src="./images/5.jpg" /></div>
-                <div class="puzzle-piece" id="piece7"><img src="./images/6.jpg" /></div>
-                <div class="puzzle-piece" id="piece8"><img src="./images/7.jpg" /></div>
-                <div class="puzzle-piece" id="piece9"><img src="./images/8.jpg" /></div>
-            </div>
-        </div>  
-    </main>
-    <script>
-        let selectedPiece = null;
-
-        let puzzlePieces = document.querySelectorAll('.puzzle-piece');
-        const correctOrder = Array.from(puzzlePieces).sort((a, b) => a.id.localeCompare(b.id));
-        let currentOrder;
-
-
-        // Function to shuffle the array
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function isPuzzleSolved() {
-            currentOrder = Array.from(document.querySelectorAll('.puzzle-piece'));;
-            console.log(currentOrder);
-            for (let i = 0; i < correctOrder.length; i++) {
-                if (correctOrder[i] !== currentOrder[i]) {
-                    return false;
-                }
-            }
-            console.log("Solved");
-            return true;
-        }
-        
-        // Randomize the order of puzzle pieces
-        puzzlePieces = Array.from(puzzlePieces);
-        puzzlePieces = shuffleArray(puzzlePieces);
-
-        // Rearrange the DOM based on the randomized array
-        const container = document.querySelector('.puzzle-set');
-        container.innerHTML = '';
-
-        puzzlePieces.forEach(piece => {
-            container.appendChild(piece);
-        });
-
-        puzzlePieces.forEach(piece => {
-            piece.addEventListener('click', selectPiece);
-        });
-
-        function selectPiece() {
-            if (!selectedPiece) {
-                selectedPiece = this;
-                this.style.zIndex = 100;
-                this.style.boxShadow = '0 0 16px 8px #f58cf4';
-            } else {
-                if (selectedPiece !== this) {
-                    swapPieces(selectedPiece, this);
-                }
-                selectedPiece.style.boxShadow = 'none';
-                selectedPiece.style.zIndex = 1;
-                selectedPiece = null;
-            }
-        }
-
-        function swapPieces(piece1, piece2) {
-            const temp = document.createElement('div');
-            piece1.parentNode.insertBefore(temp, piece1);
-            piece2.parentNode.insertBefore(piece1, piece2);
-            temp.parentNode.insertBefore(piece2, temp);
-            temp.parentNode.removeChild(temp);
-        }
-
-        let time = document.getElementById('time');
-        maxTime = 30;
-        let timer = setInterval(function() {
-            time.innerHTML = maxTime;
-            if (isPuzzleSolved()) {
-                clearInterval(timer); 
-                window.location.replace("./victory.html");
-            } else if (maxTime === 0 && !isPuzzleSolved()) {
-                clearInterval(timer); 
-                window.location.replace("./defeat.html");
-            }
-            maxTime--;
-        }, 1000)
-    </script>
+  <h1>Game list</h1>
+  <ul>
+    <li><a href="./puzzle.html">Puzzle Game</a></li>
+    <li><a href="./slicer.html">Slicer Game</a></li>
+  </ul>
 </body>
 </html>
