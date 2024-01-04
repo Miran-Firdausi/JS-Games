@@ -3,15 +3,23 @@
 <head>
     <title>Puzzle Game</title>
     <style>
-        h1 {
-            text-align: center;
+        body {
+            background-image: url('./images/background.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
         }
         h2 {
-            margin-left: 10vw;
+            margin-top: 500px;
+            color: #fff;
+            font-size: 60px;
+            text-align: center;
         }
         .puzzle-container {
             padding: 10px;
-            background-color: #dddddd   ;
+            background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
             width: fit-content;
             margin: 0 auto;
             border-radius: 10px;
@@ -20,7 +28,6 @@
             display: grid;
             grid-template-columns: auto auto auto;
             max-width: 600px;
-            overflow: hidden;
             row-gap: 2px;
             column-gap: 4px;
         }
@@ -31,21 +38,22 @@
     </style>
 </head>
 <body>
-    <h1>Puzzle</h1>
-    <h2>Time: <span id="time">--</span></h2>
-    <div class="puzzle-container">
-        <div class="puzzle-set">
-            <div class="puzzle-piece" id="piece1"><img src="./0.jpg" /></div>
-            <div class="puzzle-piece" id="piece2"><img src="./1.jpg" /></div>
-            <div class="puzzle-piece" id="piece3"><img src="./2.jpg" /></div>
-            <div class="puzzle-piece" id="piece4"><img src="./3.jpg" /></div>
-            <div class="puzzle-piece" id="piece5"><img src="./4.jpg" /></div>
-            <div class="puzzle-piece" id="piece6"><img src="./5.jpg" /></div>
-            <div class="puzzle-piece" id="piece7"><img src="./6.jpg" /></div>
-            <div class="puzzle-piece" id="piece8"><img src="./7.jpg" /></div>
-            <div class="puzzle-piece" id="piece9"><img src="./8.jpg" /></div>
-        </div>
-    </div>
+    <main>
+        <h2>Time: <span id="time">--</span></h2>
+        <div class="puzzle-container">
+            <div class="puzzle-set">
+                <div class="puzzle-piece" id="piece1"><img src="./images/0.jpg" /></div>
+                <div class="puzzle-piece" id="piece2"><img src="./images/1.jpg" /></div>
+                <div class="puzzle-piece" id="piece3"><img src="./images/2.jpg" /></div>
+                <div class="puzzle-piece" id="piece4"><img src="./images/3.jpg" /></div>
+                <div class="puzzle-piece" id="piece5"><img src="./images/4.jpg" /></div>
+                <div class="puzzle-piece" id="piece6"><img src="./images/5.jpg" /></div>
+                <div class="puzzle-piece" id="piece7"><img src="./images/6.jpg" /></div>
+                <div class="puzzle-piece" id="piece8"><img src="./images/7.jpg" /></div>
+                <div class="puzzle-piece" id="piece9"><img src="./images/8.jpg" /></div>
+            </div>
+        </div>  
+    </main>
     <script>
         let selectedPiece = null;
 
@@ -94,12 +102,14 @@
         function selectPiece() {
             if (!selectedPiece) {
                 selectedPiece = this;
-                this.style.border = '5px solid red';
+                this.style.zIndex = 100;
+                this.style.boxShadow = '0 0 16px 8px #f58cf4';
             } else {
                 if (selectedPiece !== this) {
                     swapPieces(selectedPiece, this);
                 }
-                selectedPiece.style.border = '0px solid transparent';
+                selectedPiece.style.boxShadow = 'none';
+                selectedPiece.style.zIndex = 1;
                 selectedPiece = null;
             }
         }
