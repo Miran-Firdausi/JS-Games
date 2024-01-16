@@ -50,7 +50,7 @@
 	position: fixed;
 	z-index: 10;
 	height: 10vh;
-	font-size: 10vh;
+	font-size: 60px;
 	font-weight: 100;
 	color: white;
 	-webkit-text-stroke-width: 2px;

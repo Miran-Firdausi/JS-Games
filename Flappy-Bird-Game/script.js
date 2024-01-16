@@ -15,7 +15,7 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-document.addEventListener('ontouchstart', (e) => {
+document.addEventListener('touchstart', () => {
     
     if(game_state != 'Play'){
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
@@ -46,7 +46,7 @@ function play(){
             }else{
                 if(bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width && bird_props.left + bird_props.width > pipe_sprite_props.left && bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height && bird_props.top + bird_props.height > pipe_sprite_props.top){
                     game_state = 'End';
-                    message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Press Enter To Restart';
+                    message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Touch Anywhere To Restart';
                     message.classList.add('messageStyle');
                     img.style.display = 'none';
                     return;
@@ -66,7 +66,7 @@ function play(){
     function apply_gravity(){
         if(game_state != 'Play') return;
         bird_dy = bird_dy + grativy;
-        document.addEventListener('ontouchstart', (e) => {
+        document.addEventListener('touchstart', (e) => {
             bird_dy = -7.6;
         });
 
