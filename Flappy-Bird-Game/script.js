@@ -15,9 +15,9 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener('ontouchstart', (e) => {
     
-    if(e.key == 'Enter' && game_state != 'Play'){
+    if(game_state != 'Play'){
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
